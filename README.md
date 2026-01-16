@@ -1,39 +1,46 @@
-# Analiza wpływu gamingu na wyniki akademickie i zawodowe 🎮📚
+# Przewidywanie jakości czerwonego wina 🍷📊
 
 ## Opis projektu
-Celem projektu realizowanego w ramach przedmiotu **Ewaluacja i Wizualizacja Danych (EWD)** jest przeprowadzenie pełnego cyklu eksperymentu Data Science na wybranym zbiorze danych.
+Celem projektu realizowanego w ramach przedmiotu **Ewaluacja i Wizualizacja Danych (EWD)** jest przeprowadzenie pełnego cyklu eksperymentu Data Science na zbiorze danych dotyczącym parametrów fizykochemicznych czerwonego wina.
 
 Głównym założeniem eksperymentu jest:
-* **Stworzenie modelu predykcyjnego** przewidującego wyniki (Score).
-* **Analiza wpływu nawyków grania** oraz stylu życia (sen, stres) na wydajność akademicką i zawodową.
+* **Stworzenie modelu predykcyjnego**, który na podstawie składu chemicznego wina przewidzi jego ocenę jakości (`quality`).
+* **Zbadanie wpływu poszczególnych składników** (np. alkoholu, kwasowości, siarczanów) na końcową ocenę wystawioną przez ekspertów.
 
 ---
 
 ## 📊 Dane (Dataset)
-Dane zostały pozyskane z platformy **Kaggle**: 
-[Gaming Hours vs Academic & Work Performance](https://www.kaggle.com/datasets/prince7489/gaming-hours-vs-academic-and-work-performance)
+Dane pochodzą z platformy **Kaggle**: 
+[Red Wine Quality Dataset](https://www.kaggle.com/datasets/uciml/red-wine-quality-cortez-et-al-2009)
 
 ### Charakterystyka danych:
-* **Zmienna docelowa:** `Academic_or_Work_Score` (zakres 55–95).
+* **Zmienna docelowa:** `quality` (skala dyskretna od 4 do 8).
 * **Główne cechy (Features):**
-    * Nawyki gamingowe (godziny dzienne/tygodniowe, typy gier).
-    * Styl życia (godziny snu, poziom stresu).
-    * Dane demograficzne (wiek, zawód, płeć).
+    * `alcohol`: Zawartość alkoholu (najsilniejszy pozytywny predyktor).
+    * `volatile acidity`: Kwasowość lotna (wysoka zawartość obniża jakość).
+    * `sulphates`: Zawartość siarczanów.
+    * `citric acid`: Zawartość kwasu cytrynowego.
+    * `pH`, `density`, `chlorides`, `residual sugar` i inne parametry chemiczne.
 
 ---
 
 ## 🎯 Cele eksperymentu
-1. **Faza 1: Cel i Ewaluacja** - Zdefiniowanie problemu i przyjęcie metryki sukcesu (zakładany błąd MAE < 10% zakresu zmiennej).
-2. **Faza 2: Eksploracyjna Analiza Danych (EDA)** - Wizualizacja rozkładów, szukanie korelacji oraz identyfikacja wartości odstających (outliers) za pomocą wykresów pudełkowych.
-3. **Faza 3: Przygotowanie danych** - Czyszczenie zbioru (usunięcie `User_ID`, `Productivity_Level`), kodowanie zmiennych kategorycznych oraz podział na zbiór treningowy i testowy.
-4. **Faza 4: Modelowanie** - Budowa i trenowanie modeli regresyjnych.
-5. **Faza 5: Ewaluacja** - Porównanie wyników i wyciągnięcie wniosków.
+1. **Faza 1: Cel i Ewaluacja** - Zdefiniowanie problemu regresji i przyjęcie metryk sukcesu (MAE, RMSE, R²).
+2. **Faza 2: Eksploracyjna Analiza Danych (EDA)** - Analiza macierzy korelacji, wizualizacja rozkładów oraz identyfikacja najsilniejszych czynników wpływających na jakość.
+3. **Faza 3: Przygotowanie danych (Preprocessing)** - Czyszczenie zbioru z wartości odstających przy użyciu metody **Z-score** (usunięcie rekordów wykraczających poza zakres +/- 3 odchylenia standardowe).
+4. **Faza 4: Modelowanie** - Trening modeli takich jak Random Forest Regressor, k-NN oraz Regresja Liniowa.
+5. **Faza 5: Ewaluacja** - Porównanie wyników i analiza istotności cech (Feature Importance).
 
 ---
 
-## 🛠️ Wykorzystane technologie
-* **Język:** Python 🐍
-* **Biblioteki:** Pandas, NumPy, Matplotlib, Seaborn, Scikit-learn
+## 📈 Kluczowe spostrzeżenia
+* Wstępna analiza korelacji wykazała, że **zawartość alkoholu** jest najsilniej powiązana z wysoką jakością wina.
+* Wysoka **kwasowość lotna (volatile acidity)** koreluje ujemnie z oceną, co sugeruje jej negatywny wpływ na profil smakowy.
+* Usunięcie wartości odstających pozwoliło na ustabilizowanie rozkładów cech przed procesem modelowania.
 
 ---
-**Autor:** Newbie Duck
+
+## 🛠️ Wykorzystane narzędzia
+* **Python** (Pandas, NumPy)
+* **Seaborn / Matplotlib** (Wizualizacja danych)
+* **Scikit-learn** (Modelowanie i ewaluacja)
